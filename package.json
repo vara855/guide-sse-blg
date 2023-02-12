@@ -1,0 +1,27 @@
+{
+  "name": "sse-guide-blg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": ">=16",
+    "npm": ">=8"
+  },
+  "engineStrict": true,
+  "workspaces": [
+    "./*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vara855/guide-sse-blg.git"
+  },
+  "author": "vara855",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vara855/guide-sse-blg/issues"
+  },
+  "homepage": "https://github.com/vara855/guide-sse-blg#readme"
+}
