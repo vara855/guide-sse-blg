@@ -7,7 +7,21 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div id="eventsContainer">
+        <h1>Events:</h1>
+      </div>
+      <div>
+        <p>
+          When connection closed on backend side, the
+          <b><code>onerror</code></b> listener will be called. The next
+          connection will be created automatically till you close it manually.
+        </p>
+        <p style="font-size: 0.8rem; font-weight: 200">
+          You can check browser console for events or errors.
+        </p>
+      </div>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

@@ -2,6 +2,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: large;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -41,6 +42,22 @@ h1 {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+#app > :last-child {
+  width: 300px;
+  display: grid;
+  place-content: center;
+}
+
+ul {
+  height: 60vh;
+
+  overflow-y: auto;
+  padding: 1rem;
 }
 
 .logo {
@@ -94,4 +111,12 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+li.open {
+  color: lime;
+}
+
+li.error {
+  color: tomato;
 }

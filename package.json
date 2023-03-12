@@ -12,7 +12,8 @@
     "./*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "vanilla": "npm run -w vanila-js-sse-example dev",
+    "server": "node --watch nodejs-sse-example/index.js"
   },
   "repository": {
     "type": "git",
