@@ -1,8 +1,21 @@
-let http = require("http");
-let url = require("url");
-let querystring = require("querystring");
+const http = require("http");
+const { setInterval } = require("node:timers/promises");
 
-function onDigits(req, res) {
+function createSseEvent(data) {
+  return `data: ${data}\n\n`;
+}
+const routes = new Map([
+  ["/", onRoot],
+  ["/digits", onDigits],
+]);
+
+function onRoot(req, res) {
+  res.write(JSON.stringify({ status: "OK" }));
+  res.end();
+}
+
+async function onDigits(req, res) {
+  console.log(`open -> ${req.url}`);
   res.writeHead(200, {
     "Content-Type": "text/event-stream; charset=utf-8",
     "Cache-Control": "no-cache",
@@ -10,36 +23,24 @@ function onDigits(req, res) {
 
   let i = 0;
 
-  let timer = setInterval(write, 1000);
-  write();
-
-  function write() {
+  for await (const startTime of setInterval(1000, Date.now())) {
+    const now = Date.now();
     i++;
-
-    if (i == 10) {
+    const message = `Event #${i} time: ${new Date().toLocaleTimeString()}`;
+    res.write(createSseEvent(message));
+    console.log(`Produced message: "${message}"`);
+    if (now - startTime > 10000) {
       res.write("event: bye\ndata: bye-bye\n\n");
-      clearInterval(timer);
+      console.log(`close response ${req.url}`);
       res.end();
-      return;
+      break;
     }
-
-    console.log(`produced number ${i}`);
-    res.write(`data: Event #${i}\n\n`);
   }
-}
-
-function onRoot(req, res) {
-  res.write(JSON.stringify({ status: "OK" }));
-  res.end();
 }
 
 function accept(req, res) {
-  if (req.url == "/") {
-    onRoot();
-  }
-  if (req.url == "/digits") {
-    onDigits(req, res);
-    return;
+  if (routes.has(req.url)) {
+    return routes.get(req.url)(req, res);
   }
   res.write("not found");
   res.end();
