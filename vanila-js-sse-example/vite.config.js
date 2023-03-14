@@ -3,7 +3,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/be": {
-        target: "http://localhost:8080",
+        target: "http://0.0.0.0:8080",
         rewrite: (path) => path.replace(/^\/be/, ""),
         ws: true,
         secure: false,

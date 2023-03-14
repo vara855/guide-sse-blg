@@ -12,8 +12,12 @@
     "./*"
   ],
   "scripts": {
-    "vanilla": "npm run -w vanila-js-sse-example dev",
-    "server": "node --watch nodejs-sse-example/index.js"
+    "vanilla": "npm run --prefix vanila-js-sse-example dev",
+    "server": "node --watch nodejs-sse-example/index.js",
+    "stackblitz:vanilla-demo": "npx concurrently 'npm:server' 'npm:vanilla'"
+  },
+  "devDependencies": {
+    "concurrently": "7.6.0"
   },
   "repository": {
     "type": "git",
